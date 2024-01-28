@@ -1,0 +1,68 @@
+﻿@model RegistrationLogin.Mvc.Models.Register
+@if (ViewBag.ErrorMessage != null)
+{
+    <p class="text-danger">@ViewBag.ErrorMessage</p>
+}
+<h1>Registration</h1>
+
+<style>
+    form {
+        width: 300px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<div>
+    <form asp-action="Registration" method="post">
+        <div>
+            <label for="FirstName">First Name:</label>
+            <input type="text" asp-for="FirstName"  required />
+        </div>
+        <div>
+            <label for="LastName">Last Name:</label>
+            <input type="text" asp-for="LastName" required/>
+        </div>
+        <div>
+            <label for="Email">Email:</label>
+            <input type="email" asp-for="Email" required/>
+        </div>
+        <div>
+            <label for="Password">Password:</label>
+            <input type="password" asp-for="Password" required/>
+        </div>
+        <div>
+            <label for="Confirm_Password">Confirm Password:</label>
+            <input type="password" asp-for="Confirm_Password" required/>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+</div>
+

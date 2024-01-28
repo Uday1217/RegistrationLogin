@@ -1,0 +1,64 @@
+﻿@model RegistrationLogin.Mvc.Models.Register
+
+
+<style>
+    /* Add your custom styles here */
+    .login-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+</style>
+<h2>Login</h2>
+
+ 
+<link rel="stylesheet" href="~/css/login-style.css">
+
+<div class="login-container">
+    <form asp-controller="Account" asp-action="Login" method="post" class="login-form">
+        <div class="form-group">
+            <label asp-for="Email">Email:</label>
+            <input type="text" asp-for="Email" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Password:</label>
+            <input type="password" asp-for="Password" class="form-control" required/>
+        </div>
+        <button type="submit" class="btn btn-primary">Log In</button>
+    </form>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    }
+</div>
+
+

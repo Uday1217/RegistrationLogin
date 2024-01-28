@@ -1,0 +1,29 @@
+﻿@model List<RegistrationLogin.Mvc.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Category</th>
+            <th>Product Subcategory</th>
+            <th>Product Image</th>
+            <th>Product Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Category</td>
+                <td>@product.SubCategory</td>
+                <td><img src="data:image/png;base64,@Convert.ToBase64String(product.Image)" alt="@product.Name" style="width: 100px; height: 100px;" /></td>
+                <td>@product.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>

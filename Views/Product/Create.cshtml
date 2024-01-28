@@ -1,0 +1,140 @@
+﻿@model RegistrationLogin.Mvc.Models.Product 
+
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h2> Product</h2>
+
+<style>
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-control-file {
+        border: none;
+        padding-top: 5px;
+    }
+
+    .text-danger {
+        color: red;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+</style>
+
+
+<div class="container mt-5">
+   
+    <form asp-controller="Product" asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Product Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Category" class="control-label" >Category</label>
+            <span><i class="ion-chevron-down"></i></span>
+            <select asp-for="Category" class="form-control" id="catDropdown">
+                <option value="">Select a Category</option>
+                <option value="Phone">Phone</option>
+                <option value="Laptop">Laptop</option>
+               
+            </select>
+         
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SubCategory" class="control-label" >Subcategory</label>
+            <select asp-for="SubCategory" class="form-control" id="subcategoryDropdown">
+                <option value="">Select a Subcategory</option>
+                <option value="iPhone">iPhone</option>
+                <option value="Sumsung">Sumsung</option>
+                <option value="Dell">Dell</option>
+                <option value="MacBook">MacBook</option>
+                
+            </select>
+            <span asp-validation-for="SubCategory" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Image" class="control-label">Product Image</label>
+            <input asp-for="Image" type="file" class="form-control-file" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Price" class="control-label">Price</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+        $(document).ready(function () {
+           
+           
+        });
+        $("#catDropdown").change(function () {
+            var category = $(this).val();
+            if (category !== "") {
+                $.ajax({
+                    url: "/Product/Subcategorys?categoryId=1",
+                    data: { category: category },
+                    method: "GET",
+                    success: function (result) {
+                        var subcategoryDropdown = $("#subcategoryDropdown");
+                        subcategoryDropdown.empty();
+                        subcategoryDropdown.append($("<option>").attr("value", "").text("Select a Subcategory"));
+                        $.each(result, function (index, subcategory) {
+                            subcategoryDropdown.append($("<option>").attr("value", subcategory).text(subcategory));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+            else {
+                var subcategoryDropdown = $("#subcategoryDropdown");
+                subcategoryDropdown.empty();
+                subcategoryDropdown.append($("<option>").attr("value", "").text("Select a Subcategory"));
+            }
+        });
+        
+</script>
+}
+
+
